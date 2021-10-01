@@ -1,0 +1,140 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:video="clr-namespace:Video" 
+                    xmlns:conv="clr-namespace:Mimica.Utils.Converters"
+                    >
+
+    <conv:СBoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <conv:CInvertBoolToVisibilityConverter  x:Key="InvertBoolToVisibilityConverter" />
+
+    <Style x:Key="DefaultCameraStyle" TargetType="{x:Type video:CCamera}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type video:CCamera}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Background="Black" x:Name="CameraGrid">
+                            <!--#region RowDefinitions-->
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+                            <!--#endregion RowDefinitions-->
+                            <!--#region Grid.ColumnDefinitions -->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="99*" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="30" />
+                            </Grid.ColumnDefinitions>
+                            <!--#endregion Grid.ColumnDefinitions -->
+                            
+                            <ScrollViewer Width="{Binding ElementName=CameraGrid,Path=Width}"
+                                          Grid.Row="0"
+                                          Grid.RowSpan="1"
+                                          Grid.Column="0"
+                                          Grid.ColumnSpan="3"                                             
+                                          HorizontalScrollBarVisibility="Auto"
+                                          VerticalScrollBarVisibility="Auto"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch"
+                                >                               
+                                <ContentPresenter Content="{Binding ViewPort,RelativeSource={RelativeSource AncestorType={x:Type video:CCamera}}}" 
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch" 
+                                              Visibility="{Binding !IsFullscreen,RelativeSource={RelativeSource AncestorType={x:Type video:CCamera}},Converter={StaticResource BoolToVisibilityConverter}}"
+                                              SnapsToDevicePixels="True"
+                                              RenderOptions.EdgeMode="Aliased"
+                                              RenderOptions.BitmapScalingMode="Fant"
+                                              RenderOptions.ClearTypeHint="Enabled"                                              
+                                              RenderOptions.CachingHint="Cache"                                                                                          
+                                              >
+                                    <ContentPresenter.LayoutTransform>
+                                        <ScaleTransform ScaleX="{Binding Path=Scale.Value,RelativeSource={RelativeSource AncestorType={x:Type video:CCamera}}}" 
+                                                        ScaleY="{Binding Path=Scale.Value,RelativeSource={RelativeSource AncestorType={x:Type video:CCamera}}}" 
+                                                        />
+                                    </ContentPresenter.LayoutTransform>
+                                    
+                                </ContentPresenter>
+                            </ScrollViewer>                            
+
+                            <DockPanel Background="Black" 
+                                       Grid.Row="1"
+                                       Grid.Column="0"                                       
+                                       >
+                                <!--#region Play Button -->
+                                <Button 
+                                        Width="22"
+                                        Height="22"
+                                        Margin="4,2"
+                                        HorizontalAlignment="Left"
+                                        Opacity="0.60"
+                                        Command="{Binding PlayCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type video:CCamera}}}"                                   
+                                        >
+                                    <Image  Height="14" 
+                                            Width="14" 
+                                            HorizontalAlignment="Left"
+                                            Source="/mJpegPlayer;component/icons/play.png"                                             
+                                    />
+                                </Button>
+                                <!--#endregion Play Button -->
+                                <!--#region Stop Button -->
+                                <Button 
+                                        Width="22"
+                                        Height="22"
+                                        Margin="4,2"
+                                        HorizontalAlignment="Left"
+                                        Opacity="0.60"
+                                        Command="{Binding StopCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type video:CCamera}}}"                                   
+                                        >
+                                    <Image  Height="14" 
+                                            Width="14" 
+                                            HorizontalAlignment="Left"
+                                            Source="/mJpegPlayer;component/icons/stop.png"                                             
+                                    />
+                                </Button>
+                                <!--#endregion Stop Button -->
+                            </DockPanel>
+                            <DockPanel     Grid.Row="1"
+                                           Grid.Column="1"
+                                           Width="100" 
+                                           HorizontalAlignment="Right"  
+                                           Visibility="{Binding IsFullscreen,RelativeSource={RelativeSource AncestorType={x:Type video:CCamera}},Converter={StaticResource BoolToVisibilityConverter}}"
+                                           >
+                                <!--#region Slider-->
+                                <Slider 
+                                        Margin="4,0"
+                                        VerticalAlignment="Center"
+                                        Minimum="0.0001"
+                                        Maximum="10"  
+                                        Value="{Binding Path=Scale.Value,Mode=TwoWay,RelativeSource={RelativeSource AncestorType={x:Type video:CCamera}}}"
+                                        />
+                                <!--#endregion Slider-->
+                            </DockPanel>
+                            <DockPanel Grid.Row="1"
+                                       Grid.Column="2">
+                                <!--#region Fullscreen Button -->
+                                <Button 
+                                        Width="22"
+                                        Height="22"
+                                        Margin="4,2"
+                                        HorizontalAlignment="Right"
+                                        Opacity="0.60"
+                                        Command="{Binding FullscreenCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type video:CCamera}}}"                                   
+                                        >
+                                    <Image  Height="18" 
+                                            Width="18" 
+                                            HorizontalAlignment="Left"
+                                            Source="/mJpegPlayer;component/icons/fullscreen.png"                                             
+                                    />
+                                </Button>
+                                <!--#endregion Fullscreen Button -->
+                            </DockPanel>
+                        </Grid>
+                    </Border>                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

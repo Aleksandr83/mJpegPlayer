@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<!--
+   net framework 4.6.1
+   
+   экран по умолчанию делится на 10 строк и 10 столбцов.
+   rowscount - количество строк
+   columnscount - количество столбцов
+   
+   source - url 
+   строки и столбцы начинаются с 0; 
+   margin  - отступ(ы) (формат: n или n,n или n,n,n,n  n-число) 
+   gridrow - "координата" строки верхнего левого угла окна просмотра камеры 
+   gridcolumn - "координата" столбца верхнего левого угла окна просмотра камеры
+   gridrowspan - сколько строк занимает окно просмотра
+   gridcolumnspan - сколько столбцов занимает окно просмотра     
+   autoplay - автоматическое воспроизведение при запуске программы
+   autoreconect - автоматическое переподключение камеры при возникновении 
+     ошибки (к примеру, потеря потока)
+   errormsg - флаг отображения ошибок воспроизведения с камеры
+   
+   ниже пример конфигурации на 5 камер
+-->
+<cfg>
+  <grid>
+    <rowscount>10</rowscount>
+    <columnscount>10</columnscount>
+  </grid>
+   
+  <camera>
+    <margin>10,10,5,5</margin>
+    <gridrow>0</gridrow>
+    <gridcolumn>0</gridcolumn>
+    <gridrowspan>4</gridrowspan>
+    <gridcolumnspan>3</gridcolumnspan>
+    <autoplay>true</autoplay>
+    <autoreconect>true</autoreconect>
+    <errormsg>false</errormsg>
+    <source>http://video.local:8086</source>
+  </camera>
+
+  <camera>
+    <margin>5,10,5,5</margin>
+    <gridrow>0</gridrow>
+    <gridcolumn>3</gridcolumn>
+    <gridrowspan>4</gridrowspan>
+    <gridcolumnspan>3</gridcolumnspan>
+    <autoplay>true</autoplay>
+    <autoreconect>true</autoreconect>
+    <errormsg>false</errormsg>
+    <source>http://video.local:8082</source>    
+  </camera>  
+  <camera>
+    <margin>5,10,10,5</margin>
+    <gridrow>0</gridrow>
+    <gridcolumn>6</gridcolumn>
+    <gridrowspan>4</gridrowspan>
+    <gridcolumnspan>4</gridcolumnspan>
+    <autoplay>true</autoplay>
+    <autoreconect>true</autoreconect>
+    <errormsg>false</errormsg>
+    <source>http://video.local:8085</source>
+  </camera>  
+  <camera>
+    <margin>10,5,5,10</margin>
+    <gridrow>4</gridrow>
+    <gridcolumn>0</gridcolumn>
+    <gridrowspan>6</gridrowspan>
+    <gridcolumnspan>5</gridcolumnspan>
+    <autoplay>true</autoplay>
+    <autoreconect>true</autoreconect>
+    <errormsg>false</errormsg>
+    <source>http://video.local:8083</source>
+  </camera>
+  
+  <camera>
+    <margin>5,5,10,10</margin>
+    <gridrow>4</gridrow>
+    <gridcolumn>5</gridcolumn>
+    <gridrowspan>6</gridrowspan>
+    <gridcolumnspan>5</gridcolumnspan>
+    <autoplay>true</autoplay>
+    <autoreconect>true</autoreconect>
+    <errormsg>false</errormsg>
+    <source>http://video.local:8084</source>
+  </camera>  
+
+</cfg>
